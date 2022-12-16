@@ -1,7 +1,23 @@
-echo "# hello-world-FelixStr" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/Brights-DevOps-2022-Script/hello-world-FelixStr.git
-git push -u origin main
+pipeline {
+    agent any
+    stages {
+        stage('build') {
+            steps {
+                sh 'echo building ...'
+                sh "echo gansefusse test ... "
+                sh "which python || true"
+                sh "which python3 || true"
+            }
+        }
+        stage('test') {
+            steps {
+                sh 'echo testing ...'
+            }
+        }
+        stage('deploy') {
+            steps {
+                sh 'echo deploying ...'
+            }
+        }
+    }
+}
