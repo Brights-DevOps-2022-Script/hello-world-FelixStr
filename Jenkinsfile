@@ -5,8 +5,7 @@ pipeline {
         }
     }
     environment {
-        ANSIBLE_KEY = credentials('20.218.111.156')
-        ANSIBLE_CONFIG = "etc/ansible/ansible.cfg"
+    ANSIBLE_KEY = credentials('ansible_VM')   
     }
     stages {
         stage('build') {
@@ -17,7 +16,7 @@ pipeline {
                 sh "ansible-playbook --version"
                 sh "ansible-galaxy --version"
                 sh "ansible-galaxy collection install -r requirements.yml"
-                sh "ansible-playbook -i list.host --private-key=$ANSIBLE_KEY ansible-playbook.yml"
+                sh "ansible-playbook -i list.host --private-key=$ANSIBLE_KEY --ssh-common-args='-o StrictHostKeyChecking=no' ansible-playbook.yml"
             }
         }
     }
