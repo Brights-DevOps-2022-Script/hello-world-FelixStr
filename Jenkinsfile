@@ -3,9 +3,6 @@ pipeline {
         docker {
             image 'cytopia/ansible'
         } 
-            environment {
-        ANSIBLE_KEY = credentials('20.218.111.156')
-    }
     }
     stages {
         stage('build') {
@@ -15,6 +12,7 @@ pipeline {
         }
         stage(" execute Ansible") {
             steps {
+                 env.MY_VARIABLE = "some value"
                 ansiblePlaybook credentialsId: '40fe1ee1-8a17-49c1-9663-e0978b2ce449', disableHostKeyChecking: true, installation: 'Ansible', playbook: 'playbook.yml' {
                 }
 
