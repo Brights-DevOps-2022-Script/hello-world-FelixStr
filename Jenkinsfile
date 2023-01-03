@@ -5,7 +5,7 @@ pipeline {
         }
     }
     environment {
-    ANSIBLE_KEY = credentials('ansible_VM')   
+    ANSIBLE_KEY = credentials('20.218.111.156')   
     }
     stages {
         stage('build') {
