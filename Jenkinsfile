@@ -5,15 +5,19 @@ pipeline {
         }
     }
     environment {
-        ANSIBLE_KEY = credentials('20.218.111.156')
-        ANSIBLE_CONFIG = "etc/ansible/ansible.cfg"
+    ANSIBLE_KEY = credentials('ansible_VM')   
     }
     stages {
         stage('build') {
             steps {
-                sh 'ansible --version'
-                sh 'ANSIBLE_CONFIG=$ANSIBLE_CONFIG ansible-playbook -i hostfile --private-key=$ANSIBLE_KEY playbook.yml'
-            }   
-        }    
+                sh 'echo building ...'
+                sh "which ansible || true"
+                sh "ansible --version"
+                sh "ansible-playbook --version"
+                sh "ansible-galaxy --version"
+                sh "ansible-galaxy collection install -r requirements.yml"
+                sh "ansible-playbook -i list.host --private-key=$ANSIBLE_KEY ansible-playbook.yml"
+            }
+        }
     }
 }
