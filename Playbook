@@ -1,9 +1,8 @@
-- name: vm
-  hosts: all
-  user: snowman
-  become: true
+- hosts: vm
+  ignore_unreachable: true
   tasks:
     - name: creating a empty file
       file:
-        path: /
+        path: "/home/snowman/simon/simontest.txt"
         state: touch
+        owner: snowman
