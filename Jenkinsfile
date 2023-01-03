@@ -1,23 +1,21 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'cytopia/ansible'
+        }
+    }
     stages {
         stage('build') {
             steps {
-                sh 'echo building ...'
-                sh "echo gansefusse test ... "
-                sh "which python || true"
-                sh "which python3 || true"
+                sh 'ansible --version'
             }
         }
-        stage('test') {
+        stage(" execute Ansible") {
             steps {
-                sh 'echo testing ...'
-            }
-        }
-        stage('deploy') {
-            steps {
-                sh 'echo deploying ...'
-            }
-        }
+                ansiblePlaybook credentialsId: '40fe1ee1-8a17-49c1-9663-e0978b2ce449', disableHostKeyChecking: true, installation: 'Ansible', playbook: 'playbook.yml' {
+                }
+                            
+            }    
+        }    
     }
 }
