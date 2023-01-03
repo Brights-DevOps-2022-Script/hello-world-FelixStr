@@ -1,8 +1,20 @@
-- hosts: vm
-  ignore_unreachable: true
+
+- name: Playbook
+  hosts: VM
+  become: yes
   tasks:
-    - name: creating a empty file
-      file:
-        path: "/home/snowman/simon/simontest.txt"
-        state: touch
-        owner: snowman
+    - name: enable and start firewalld
+      systemd:
+        name: firewalld
+        state: started
+        enabled: yes
+    - name: permit traffic on 22/tcp for ssh connection
+      ansible.posix.firewalld:
+        port: 22
+        permanent: yes
+        state: enabled
+        immediate: yes
+    - name: Copy file
+      ansible.builtin.copy:
+        src: hostfile.log
+        dest: /home/jester
