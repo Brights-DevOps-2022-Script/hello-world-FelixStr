@@ -1,6 +1,3 @@
-- name: My playbook
-  hosts: "{{ host_file }}"
-  vars:
-    host_file: /path/to/host/file
-  tasks:
-    # tasks go here
+
+[vm]
+20.218.111.156
