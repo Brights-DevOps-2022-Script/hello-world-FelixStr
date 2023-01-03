@@ -2,20 +2,23 @@ pipeline {
     agent {
         docker {
             image 'cytopia/ansible'
-        } 
+        }
+    }
+    environment {
+    ANSIBLE_KEY = credentials('5b26583f-7105-493a-bf80-a9f93392344c')
+    ANSIBLE_HOST_KEY_CHECKING = false
     }
     stages {
         stage('build') {
             steps {
-                sh 'ansible --version'
+                sh 'echo building ...'
+                sh "which ansible || true"
+                sh "ansible --version"
+                sh "ansible-playbook --version"
+                sh "ansible-galaxy --version"
+                sh "ansible-galaxy collection install -r requirements.yml"
+                sh "ansible-playbook -i list.host --private-key=$ANSIBLE_KEY ansible-playbook.yml"
             }
         }
-        stage(" execute Ansible") {
-            steps {
-                ansiblePlaybook credentialsId: '40fe1ee1-8a17-49c1-9663-e0978b2ce449', disableHostKeyChecking: true, installation: 'Ansible', playbook: 'playbook.yml' {
-                }
-
-            }    
-        }    
     }
 }
