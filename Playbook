@@ -1,4 +1,5 @@
-- hosts: 20.218.111.156
+- name: vm
+  hosts: all
   user: snowman
   become: true
   tasks:
