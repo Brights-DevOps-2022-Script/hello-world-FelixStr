@@ -2,7 +2,10 @@ pipeline {
     agent {
         docker {
             image 'cytopia/ansible'
-        }
+        } 
+            environment {
+        ANSIBLE_KEY = credentials('20.218.111.156')
+    }
     }
     stages {
         stage('build') {
