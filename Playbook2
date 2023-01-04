@@ -1,9 +1,0 @@
-- hosts: vm
-  ignore_unreachable: true
-    - name: Install packages
-      ansible.builtin.apt:
-        name:
-              - nginx
-              - git
-        state: latest
-   
