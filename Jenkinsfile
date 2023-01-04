@@ -9,13 +9,13 @@ pipeline {
         ANSIBLE_HOST_KEY_CHECKING = 'False'
             }
     stages {
-        stage('build') {
+        stage('Docker install') {
             steps {
                 sh 'apk update'
                 sh 'apk add --update --no-cache openssh sshpass'
                 sh 'ansible --version'
                 sh "ansible-playbook --version"
-                sh "ansible-playbook -vvv -i Hostfile ansible-playbook.yml -e ansible_ssh_pass=$ANSIBLE_KEY_PSW"
+                sh "ansible-playbook -vvv -i Hostfile PlaybookDocker.yml -e ansible_ssh_pass=$ANSIBLE_KEY_PSW"
             }   
         }    
     }

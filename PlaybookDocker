@@ -2,11 +2,11 @@
   hosts: vm
   tasks: 
     - name: Install the packages dependencies
-    ansible.builtin.apt:
-      name: 
+      ansible.builtin.apt:
+        name: 
         - ca-certificates
         - curl
         - gnupg
         - lsb-release
-      state: latest
-      update_cache: true
+        state: latest
+        update_cache: true
