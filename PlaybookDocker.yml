@@ -67,7 +67,7 @@
 
     - name: Test hello-world container #hello world container laufen lassen
       ansible.builtin.docker_container:
-       name: hello-world
+       name: DingsBumsla
        image: hello-world
        state: started
     
