@@ -81,21 +81,21 @@
       ansible.builtin.debug:
         msg: "Docker is installed."
 
-    - name: check if docker is running
+    - name: check if docker is running #check if docker is running
       ansible.builtin.service:
         name: docker
         state: started
 
-    - name: print message
+    - name: print message #Check message
       ansible.builtin.debug:
         msg: "Docker is running."
 
-    - name: check if docker group is created
+    - name: check if docker group is created #checkif docker group is created
       ansible.builtin.group:
         name: docker
         state: present
 
-    - name: print message
+    - name: print message #Check message
       ansible.builtin.debug:
         msg: "Docker group is created."
 
@@ -121,7 +121,7 @@
        image: hello-world
        state: started
 
-    - name: check if hello-world container is running
+    - name: check if hello-world container is running #check ob der hello world container läuft
       ansible.builtin.shell: docker ps | grep simon/hello-world
       register: hello
       failed_when: hello.stderr != ''
