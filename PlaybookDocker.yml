@@ -30,8 +30,8 @@
       failed_when: dockerrepo.stderr != ''
       changed_when: false
     
-    -name: apt-get update
-     ansible.builtin.shell: sudo apt-get update
+    - name: apt-get update
+      ansible.builtin.shell: sudo apt-get update
 
     - name: docker plugins #installieren der plugins docker
       ansible.builtin.apt: 
@@ -49,7 +49,4 @@
       failed_when: dockercomponents.stderr != ''
       changed_when: false
     
-    -name: Check is Docker running
-     ansible.builtin.service:
-      name: docker
-      state: started
+    
