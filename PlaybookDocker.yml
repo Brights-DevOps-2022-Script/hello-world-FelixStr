@@ -11,3 +11,8 @@
          - lsb-release
         state: latest
         update_cache: true
+    - name: add docker apt key
+      become: yes
+      ansible.builtin.apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: latest
