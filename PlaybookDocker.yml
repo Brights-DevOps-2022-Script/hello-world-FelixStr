@@ -20,4 +20,4 @@
     - name: Add specified repository into sources list
       ansible.builtin.apt_repository:
         repo: deb https://download.docker.com/linux/ubuntu focal stable
-        state: present
+        state: "present"
