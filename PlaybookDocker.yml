@@ -58,4 +58,17 @@
       register: dockercomponents
       failed_when: dockercomponents.stderr != ''
       changed_when: false
+
+    - name: Add user to docker group
+      ansible.builtin.user:
+       name: snowman
+       comment: vm user
+       uid: 1040
+       group: docker
+
+    - name: Test hello-world container
+      ansible.builtin.docker_container:
+       name: hello-world
+       image: hello-world
+       state: started
     
