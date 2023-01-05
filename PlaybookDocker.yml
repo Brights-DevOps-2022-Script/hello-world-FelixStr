@@ -12,19 +12,30 @@
         state: latest
         update_cache: true
 
-    - name: add docker apt key #add key to download the right Docker and not a Virus
-      become: yes
+    - name: check if dependencies are installed
+      ansible.builtin.shell: dpkg -l 'ca-certificates' && dpkg -l 'curl' &&  dpkg -l 'gnupg' && dpkg -l 'lsb-release'
+      register: certificates
+      failed_when: certificates.stderr != ''
+      changed_when: false
+
+    - name: add keyrings directory
+      ansible.builtin.file:
+        path: /etc/apt/keyrings
+        state: directory 
+
+
+    - name: add docker apt key
       ansible.builtin.apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
         state: present
-        keyring: /etc/apt/keyrings
+        keyring: /etc/apt/keyrings/docker.gpg
 
-    - name: Add specified repository into sources list #add repository in source list
+    - name: Add specified repository into sources list
       ansible.builtin.apt_repository:
         repo: deb https://download.docker.com/linux/ubuntu focal state
         state: present
 
-    - name: test docker rep susseccfull #check if it's downloaded
+    - name: check added docker repository
       ansible.builtin.shell: cat "/etc/apt/sources.list.d/Docker.list"
       register: dockerrepo
       failed_when: dockerrepo.stderr != ''
@@ -33,10 +44,10 @@
     - name: apt-get update
       ansible.builtin.shell: sudo apt-get update
 
-    - name: docker plugins #installieren der plugins docker
-      ansible.builtin.apt: 
-        name:
-          - docker-ce  
+    - name: Install the package "docker"
+      ansible.builtin.apt:
+        name: 
+          - docker-ce
           - docker-ce-cli 
           - containerd.io 
           - docker-compose-plugin
