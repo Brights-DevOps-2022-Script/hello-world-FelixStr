@@ -11,13 +11,15 @@
          - lsb-release
         state: latest
         update_cache: true
+
     - name: add docker apt key
       become: yes
       ansible.builtin.apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
         state: present
-        keyring: /etc/apt/keyrings/docker.gpg
+        keyring: /etc/apt/keyrings
+
     - name: Add specified repository into sources list
       ansible.builtin.apt_repository:
-        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        repo: deb https://download.docker.com/linux/ubuntu focal state
         state: present
