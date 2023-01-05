@@ -12,39 +12,39 @@
         state: latest
         update_cache: true
 
-    - name: check if dependencies are installed
+    - name: check if dependencies are installed #Check if dependencies are installed
       ansible.builtin.shell: dpkg -l 'ca-certificates' && dpkg -l 'curl' &&  dpkg -l 'gnupg' && dpkg -l 'lsb-release'
       register: certificates
       failed_when: certificates.stderr != ''
       changed_when: false
 
-    - name: add keyrings directory
+    - name: add keyrings directory #add keyring directory
       ansible.builtin.file:
         path: /etc/apt/keyrings
         state: directory 
 
 
-    - name: add docker apt key
+    - name: add docker apt key #docker apt key adden
       ansible.builtin.apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
         state: present
         keyring: /etc/apt/keyrings/docker.gpg
 
-    - name: Add specified repository into sources list
+    - name: Add specified repository into sources list #specific repositoriy in source list adden
       ansible.builtin.apt_repository:
         repo: deb https://download.docker.com/linux/ubuntu focal state
         state: present
 
-    - name: check added docker repository
+    - name: check added docker repository #Check if the docker repository is added
       ansible.builtin.shell: cat "/etc/apt/sources.list.d/Docker.list"
       register: dockerrepo
       failed_when: dockerrepo.stderr != ''
       changed_when: false
     
-    - name: apt-get update
+    - name: apt-get update #update application für docker
       ansible.builtin.shell: sudo apt-get update
 
-    - name: Install the package "docker"
+    - name: Install the package "docker" #docker installation
       ansible.builtin.apt:
         name: 
           - docker-ce
@@ -53,7 +53,7 @@
           - docker-compose-plugin
         state: latest
 
-    - name: check if docker components are installed
+    - name: check if docker components are installed #check of installed docker components
       ansible.builtin.shell: dpkg -l 'docker-ce' && dpkg -l 'docker-ce-cli' &&  dpkg -l 'containerd.io' && dpkg -l 'docker-compose-plugin'
       register: dockercomponents
       failed_when: dockercomponents.stderr != ''
