@@ -31,7 +31,7 @@
       changed_when: false
     
     - name: docker plugins #installieren der plugins docker
-      ansible.builtin.shell: 
+      ansible.builtin.apt: 
         name:
           - docker-ce  
           - docker-ce-cli 
