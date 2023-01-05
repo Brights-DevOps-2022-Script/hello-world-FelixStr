@@ -11,9 +11,14 @@
          - lsb-release
         state: latest
         update_cache: true
+      
+    - name: check if dependencies are installed
+      ansible.builtin.shell: dpkg -l | grep -E 'ca-certificates|curl|gnupg|lsb-release'
+      register: dependencies
+      changed_when: false
     - name: add docker apt key
       become: yes
       ansible.builtin.apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
         state: "present"
-        keyring: /etc/apt/keyrings
+        keyring: /etc/apt/keyrings/docker.gpg
