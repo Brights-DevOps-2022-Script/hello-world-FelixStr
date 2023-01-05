@@ -18,6 +18,11 @@
       failed_when: certificates.stderr != ''
       changed_when: false
 
+    
+    - name: print result #Check message
+      ansible.builtin.debug:
+        msg: "Dependencies installed."
+
     - name: add keyrings directory #add keyring directory
       ansible.builtin.file:
         path: /etc/apt/keyrings
@@ -29,17 +34,30 @@
         url: https://download.docker.com/linux/ubuntu/gpg
         state: present
         keyring: /etc/apt/keyrings/docker.gpg
+    
+    - name: check if gpg key is installed #Check for GPG key
+      ansible.builtin.shell: apt-key adv --list-public-keys --with-fingerprint --with-colons | grep docker
+      register: dockergpg
+      changed_when: false
+
+    - name: print result #Check message
+      ansible.builtin.debug:
+        msg: "Docker GPG key installed."
 
     - name: Add specified repository into sources list #specific repositoriy in source list adden
       ansible.builtin.apt_repository:
         repo: deb https://download.docker.com/linux/ubuntu focal state
         state: present
 
-    - name: check added docker repository #Check if the docker repository is added
+    - name: check added docker repository #Check if Docker-repository is added
       ansible.builtin.shell: cat "/etc/apt/sources.list.d/Docker.list"
       register: dockerrepo
       failed_when: dockerrepo.stderr != ''
       changed_when: false
+
+    - name: print result #Check message
+      ansible.builtin.debug:
+        msg: "Docker repository added."
     
     - name: apt-get update #update application für docker
       ansible.builtin.shell: sudo apt-get update
@@ -59,15 +77,57 @@
       failed_when: dockercomponents.stderr != ''
       changed_when: false
 
+    - name: print message #Check message
+      ansible.builtin.debug:
+        msg: "Docker is installed."
+
+    - name: check if docker is running
+      ansible.builtin.service:
+        name: docker
+        state: started
+
+    - name: print message
+      ansible.builtin.debug:
+        msg: "Docker is running."
+
+    - name: check if docker group is created
+      ansible.builtin.group:
+        name: docker
+        state: present
+
+    - name: print message
+      ansible.builtin.debug:
+        msg: "Docker group is created."
+
     - name: Add user to docker group #snowman adminrechte für docker geben
       ansible.builtin.user:
        name: snowman
        comment: vm user
        group: docker
 
+    - name: check if user is added to docker group #check user added Docker Group
+      ansible.builtin.shell: id -nG snowman | grep -o docker
+      register: dockeruser
+      failed_when: dockeruser.stderr != ''
+      changed_when: false
+
+    - name: print message #User added to the Docker Group check
+      ansible.builtin.debug:
+        msg: "User added to the Docker group."
+
     - name: Test hello-world container #hello world container laufen lassen
       ansible.builtin.docker_container:
        name: DingsBumsla
        image: hello-world
        state: started
+
+    - name: check if hello-world container is running
+      ansible.builtin.shell: docker ps | grep simon/hello-world
+      register: hello
+      failed_when: hello.stderr != ''
+      changed_when: false
+
+    - name: print result #output if container is running check
+      ansible.builtin.debug:
+        msg: "Hello-world container is running."
     
