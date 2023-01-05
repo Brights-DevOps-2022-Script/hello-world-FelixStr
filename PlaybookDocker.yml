@@ -41,7 +41,7 @@
         update_cache: true
 
     - name: Check if Docker is running #check if docker is running
-      ansible.builtin.service: dkpg -l 'docker-ce' dkpg -l 'docker-ce-cli' dkpg -l 'containerd.io' dkpg -l 'docker-compose-plugin'
+      ansible.builtin.service: dpkg -l 'docker-ce' dpkg -l 'docker-ce-cli' dpkg -l 'containerd.io' dpkg -l 'docker-compose-plugin'
       register: dockercomponents
       failed_when: dockercomponents.stderr != ''
       changed_when: false
