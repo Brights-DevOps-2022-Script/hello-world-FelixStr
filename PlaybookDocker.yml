@@ -63,7 +63,7 @@
       ansible.builtin.user:
        name: snowman
        comment: vm user
-       uid: 1019
+       uid: 1000
        group: docker
 
     - name: Test hello-world container #hello world container laufen lassen
