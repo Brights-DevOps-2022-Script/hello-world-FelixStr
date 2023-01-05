@@ -23,12 +23,15 @@
       ansible.builtin.apt_repository:
         repo: deb https://download.docker.com/linux/ubuntu focal state
         state: present
+
     - name: test docker rep susseccfull #check if it's downloaded
       ansible.builtin.shell: sudo apt-cache policy | grep docker
       register: dockerrepo
       failed_when: dockerrepo.stderr != ''
       changed_when: false
+
     - name: Check if Docker is running #check if docker is running
-      ansible.builtin.service:
-      name: docker
-      state: started
+      ansible.builtin.service: dkpg -1 'docker-ce' dkpg -1 'docker-ce-cli' dkpg -1 'containerd.io' dkpg -1 'docker-compose-plugin'
+      register: dockercomponents
+      failed_when: dockercomponents.stderr != ''
+      changed_when: false
