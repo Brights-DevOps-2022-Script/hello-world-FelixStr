@@ -29,6 +29,14 @@
       register: dockerrepo
       failed_when: dockerrepo.stderr != ''
       changed_when: false
+    
+    - name: docker plugins #installieren der plugins docker
+      ansible.builtin.shell: docker-ce docker-ce-cli containerd.io docker-compose-plugin
+      register: dockercomponents
+      failed_when: dockercomponents.stderr != ''
+      changed_when: false
+
+
 
     - name: Check if Docker is running #check if docker is running
       ansible.builtin.service: dkpg -1 'docker-ce' dkpg -1 'docker-ce-cli' dkpg -1 'containerd.io' dkpg -1 'docker-compose-plugin'
