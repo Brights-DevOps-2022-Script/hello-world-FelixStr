@@ -19,5 +19,5 @@
         keyring: /etc/apt/keyrings/docker.gpg
     - name: Add specified repository into sources list
       ansible.builtin.apt_repository:
-        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        repo: deb https://download.docker.com/linux/ubuntu focal state
         state: "present"
