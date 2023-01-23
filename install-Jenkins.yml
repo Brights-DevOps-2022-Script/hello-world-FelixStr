@@ -19,13 +19,13 @@
 
     - name: install jenkins #Install Jenkins
       ansible.builtin.apt:
-        name: Jenkins
+        name: jenkins
         state: present
 
-    - name: check if Jenkins is installed #check if docker is running
+    - name: check if jenkins is installed #check if docker is running
       ansible.builtin.service:
-        register: Jenkins
-      failed_when: Jenkins.stderr != ''
+        register: jenkins
+      failed_when: jenkins.stderr != ''
       changed_when: false
 
     - name: print message #Check message
@@ -34,12 +34,12 @@
 
     - name: Start Jenkins #Start Jenkins
       ansible.builtin.service:
-        name: Jenkins
+        name: jenkins
         state: started
 
     - name: check if Jenkins is running #check if Jenkins is running
       ansible.builtin.service:
-        name: Jenkins
+        name: jenkins
         state: started
 
     - name: print message #Check message
