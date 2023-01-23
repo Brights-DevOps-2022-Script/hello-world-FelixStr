@@ -47,7 +47,7 @@
         msg: "Jenkins has been started."
 
     - name: Check Jenkins status #Check if Jenkins running properly
-      ansible.builtin.shell: systemctl status jenkins
+      ansible.builtin.shell: systemctl is-active jenkins
       register: jenkins_status
       failed_when: jenkins_status.stderr != ''
 
