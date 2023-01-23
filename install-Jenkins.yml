@@ -40,6 +40,12 @@
       ansible.builtin.debug:
         msg: "Jenkins has been started."
 
+    - name: Add user to docker group #snowman adminrechte für docker geben
+      ansible.builtin.user:
+       name: jenkins
+       comment: vm user
+       group: docker
+
     
 
     
