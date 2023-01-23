@@ -24,7 +24,7 @@
 
     - name: encrypt password
       jenkins_script:
-        script: "println(hudson.util.Secret.fromString('simon2').getEncryptedValue())"
+        script: "println(hudson.util.Secret.fromString('Felix2').getEncryptedValue())"
         register: encrypted_password
 
     - name: create jenkins user
