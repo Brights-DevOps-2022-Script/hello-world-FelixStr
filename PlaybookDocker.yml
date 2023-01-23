@@ -131,3 +131,59 @@
       ansible.builtin.debug:
         msg: "Hello-world container is running."
     
+    
+    - name: Install Jenkins #Jenkins installation
+      ansible.builtin.apt:
+        name: 
+          - Jenkins
+        state: latest
+
+    - name: check if Jenkins is installed #check if docker is running
+      ansible.builtin.service:
+        register: Jenkins
+      failed_when: Jenkins.stderr != ''
+      changed_when: false
+
+    - name: print message #Check message
+      ansible.builtin.debug:
+        msg: "Jenkins is installed."
+
+    - name: Start Jenkins #Start Jenkins
+      ansible.builtin.service:
+        name: jenkins
+        state: started
+
+    - name: check if Jenkins is running #check if Jenkins is running
+      ansible.builtin.service:
+        name: Jenkins
+        state: started
+
+    - name: print message #Check message
+      ansible.builtin.debug:
+        msg: "Jenkins has been started."
+
+    - name: Check Jenkins status #Check if Jenkins running properly
+      ansible.builtin.shell: systemctl status jenkins
+      register: jenkins_status
+      failed_when: jenkins_status.stderr != ''
+
+    - name: check if Jenkins running properly #check if Jenkins running properly
+      ansible.builtin.shell: systemctl status jenkins
+      register: jenkins_status
+      failed_when: jenkins_status.stderr != ''
+      changed_when: false
+
+    - name: print message #Check message
+      ansible.builtin.debug:
+        msg: "Jenkins is running properly."
+
+    - name: Print initial admin password #Printing the initial admin password
+      ansible.builtin.shell: cat /var/lib/jenkins/secrets/initialAdminPassword
+      register: initial_password
+
+    - name: Print message #Printing the inital admin password
+      ansible.builtin.debug:
+        msg: "Jenkins is installed and configured correctly. The initial admin password is {{ initial_password.stdout }}"
+
+
+    
