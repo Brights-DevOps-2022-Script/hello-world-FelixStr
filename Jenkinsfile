@@ -5,17 +5,17 @@ pipeline {
         }
     }
     environment {
-        ANSIBLE_KEY = credentials('20.218.111.156')
+        ANSIBLE_KEY = credentials('ansible')
         ANSIBLE_HOST_KEY_CHECKING = 'False'
             }
     stages {
-        stage('Docker install') {
+        stage('build') {
             steps {
                 sh 'apk update'
                 sh 'apk add --update --no-cache openssh sshpass'
-                sh 'ansible --version'
-                sh "ansible-playbook --version"
-                sh "ansible-playbook -vvv -i Hostfile PlaybookDocker.yml -e ansible_ssh_pass=$ANSIBLE_KEY_PSW"
+                sh "ansible-galaxy install jenkins_user"
+                //sh "ansible-playbook -i hostfile install-docker.yml -e ansible_ssh_pass=$ANSIBLE_KEY_PSW"
+                sh "ansible-playbook -i hostfile install-jenkins.yml -e ansible_ssh_pass=$ANSIBLE_KEY_PSW"
             }   
         }    
     }
