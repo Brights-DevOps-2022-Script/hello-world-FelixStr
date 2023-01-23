@@ -17,7 +17,7 @@
         repo: deb https://pkg.jenkins.io/debian-stable binary/
         state: present
 
-    - name: install jenkins
+    - name: install jenkins #Install Jenkins
       ansible.builtin.apt:
         name: jenkins
         state: present
@@ -50,16 +50,6 @@
       ansible.builtin.shell: systemctl status jenkins
       register: jenkins_status
       failed_when: jenkins_status.stderr != ''
-
-    - name: check if Jenkins running properly #check if Jenkins running properly
-      ansible.builtin.shell: systemctl status jenkins
-      register: jenkins_status
-      failed_when: jenkins_status.stderr != ''
-      changed_when: false
-
-    - name: print message #Check message
-      ansible.builtin.debug:
-        msg: "Jenkins is running properly."
 
     - name: Print initial admin password #Printing the initial admin password
       ansible.builtin.shell: cat /var/lib/jenkins/secrets/initialAdminPassword
