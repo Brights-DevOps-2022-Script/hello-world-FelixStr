@@ -22,12 +22,6 @@
         name: jenkins
         state: present
 
-    - name: check if jenkins is installed #check if docker is running
-      ansible.builtin.service:
-        register: jenkins
-      failed_when: jenkins.stderr != ''
-      changed_when: false
-
     - name: print message #Check message
       ansible.builtin.debug:
         msg: "Jenkins is installed."
@@ -37,4 +31,22 @@
         name: jenkins
         state: started
 
- 
+    - name: check if jenkins is running #check if Jenkins is running
+      ansible.builtin.service:
+        name: jenkins
+        state: started
+
+    - name: print message #Check message
+      ansible.builtin.debug:
+        msg: "Jenkins has been started."
+
+    - name: Print initial admin password #Printing the initial admin password
+      ansible.builtin.shell: cat /var/lib/jenkins/secrets/initialAdminPassword
+      register: initial_password
+
+    - name: Print message #Printing the inital admin password
+      ansible.builtin.debug:
+        msg: "Jenkins is installed and configured correctly. The initial admin password is {{ initial_password.stdout }}"
+
+
+    
