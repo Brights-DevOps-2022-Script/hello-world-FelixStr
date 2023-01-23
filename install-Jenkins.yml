@@ -22,15 +22,7 @@
         name: jenkins
         state: present
 
-    - name: check if Jenkins is installed #check if docker is running
-      ansible.builtin.service:
-        register: Jenkins
-      failed_when: Jenkins.stderr != ''
-      changed_when: false
-
-    - name: print message #Check message
-      ansible.builtin.debug:
-        msg: "Jenkins is installed."
+   
 
     - name: Start Jenkins #Start Jenkins
       ansible.builtin.service:
