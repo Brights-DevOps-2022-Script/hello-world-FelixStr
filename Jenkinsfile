@@ -5,7 +5,7 @@ pipeline {
         }
     }
     environment {
-        ANSIBLE_KEY = credentials('20.218.111.156')
+        ANSIBLE_KEY = credentials('vm_frosty')
         ANSIBLE_HOST_KEY_CHECKING = 'False'
             }
     stages {
