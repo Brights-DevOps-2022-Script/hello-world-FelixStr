@@ -1,0 +1,23 @@
+- hosts: vm
+  name: install jenkins on VM
+  become: true
+  tasks:
+    - name: install dependencies
+      ansible.builtin.apt:
+        name: openjdk-17-jre
+        state: present
+
+    - name: install jenkins gpg key
+      ansible.builtin.apt_key:
+        url: https://pkg.jenkins.io/debian/jenkins.io.key
+        state: present
+
+    - name: add jenkins repository
+      ansible.builtin.apt_repository:
+        repo: deb https://pkg.jenkins.io/debian-stable binary/
+        state: present
+
+    - name: install jenkins
+      ansible.builtin.apt:
+        name: jenkins
+        state: present
