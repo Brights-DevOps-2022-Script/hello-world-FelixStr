@@ -11,6 +11,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
+                sh "echo Hello-World"
                 //sh 'apk update'
                 //sh 'apk add --update --no-cache openssh sshpass'
                 //sh "ansible-playbook -i hostfile install-docker.yml -e ansible_ssh_pass=$ANSIBLE_KEY_PSW"
