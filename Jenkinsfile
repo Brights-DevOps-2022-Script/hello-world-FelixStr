@@ -14,7 +14,7 @@ pipeline {
                 sh 'apk update'
                 sh 'apk add --update --no-cache openssh sshpass'
                 //sh "ansible-playbook -i hostfile install-docker.yml -e ansible_ssh_pass=$ANSIBLE_KEY_PSW"
-                sh "ansible-playbook -i Hostfile install-Jenkins.yml -e ansible_ssh_pass=$ANSIBLE_KEY_PSW"
+                //sh "ansible-playbook -i Hostfile install-Jenkins.yml -e ansible_ssh_pass=$ANSIBLE_KEY_PSW"
             }   
         }    
     }
