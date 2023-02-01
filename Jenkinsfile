@@ -1,22 +1,20 @@
 pipeline {
     agent {
         docker {
-            image 'cytopia/ansible'
+            image 'gcr.io/cloud-builders/kubectl'
         }
     }
     environment {
-        ANSIBLE_KEY = credentials('vm_frosty')
-        ANSIBLE_HOST_KEY_CHECKING = 'False'
-            }
+        ACRCreds = credentials('acr_creds')
+        KUBECONFIG = credentials('k8s_config')
+    }
     stages {
-        stage('build') {
+        stage('Deploy Nginx') {
             steps {
-                sh "echo Hello-World"
-                //sh 'apk update'
-                //sh 'apk add --update --no-cache openssh sshpass'
-                //sh "ansible-playbook -i hostfile install-docker.yml -e ansible_ssh_pass=$ANSIBLE_KEY_PSW"
-                //sh "ansible-playbook -i Hostfile install-Jenkins.yml -e ansible_ssh_pass=$ANSIBLE_KEY_PSW"
-            }   
-        }    
+                sh "kubectl --kubeconfig=$KUBECONFIG create namespace felixstr-heureka"
+                sh "kubectl --kubeconfig=$KUBECONFIG apply -f nginx-deployment.yaml"
+                sh "kubectl --kubeconfig=$KUBECONFIG apply -f nginx-service.yaml"
+            }
+        }
     }
 }
