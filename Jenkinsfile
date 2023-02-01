@@ -25,7 +25,8 @@ pipeline {
             steps {
                 
                 sh 'docker login devops2022.azurecr.io -u ${ACRCreds_USR} -p ${ACRCreds_PSW}'
-                sh 'docker --help'
+                
+                sh 'dockerd'
                 sh "docker tag felixstr4 devops2022.azurecr.io/devops2022.azurecr.io/nginx"
                 sh "docker push devops2022.azurecr.io/nginx:felixstr4"
             }
