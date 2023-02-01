@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'devops2022.azurecr.io/alpine-simon'
+            image 'devops2022.azurecr.io/nginx-ingtest4'
             args '--user root --privileged'
         }
     }
