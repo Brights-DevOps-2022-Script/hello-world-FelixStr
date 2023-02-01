@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'alpine/k8s:1.23.16'
+            image 'devops2022.azurecr.io/alpine-simon'
             args '--entrypoint='
         }
     }
