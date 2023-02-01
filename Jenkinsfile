@@ -14,8 +14,8 @@ pipeline {
             steps {
                  sh 'kubectl apply -f nginx-namespace.yaml'
                 //sh "kubectl --kubeconfig=$KUBECONFIG create namespace felixstrauss"
-                sh "kubectl --kubeconfig=$KUBECONFIG apply -f nginx-deployment.yaml"
-                sh "kubectl --kubeconfig=$KUBECONFIG apply -f nginx-service.yaml"
+                sh "kubectl  apply -f nginx-deployment.yaml -n felixstrspace"
+                sh "kubectl  apply -f nginx-service.yaml -n felixstrspace"
             }
         }
     }
