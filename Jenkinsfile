@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Deploy Nginx') {
             steps {
-                sh "kubectl --kubeconfig=$KUBECONFIG create namespace felixstr-heureka"
+                sh "kubectl --kubeconfig=$KUBECONFIG create namespace felixstrauss"
                 sh "kubectl --kubeconfig=$KUBECONFIG apply -f nginx-deployment.yaml"
                 sh "kubectl --kubeconfig=$KUBECONFIG apply -f nginx-service.yaml"
             }
