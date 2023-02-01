@@ -1,7 +1,8 @@
 pipeline {
     agent {
         docker {
-            image 'gcr.io/cloud-builders/kubectl' --entrypoint=
+            image 'gcr.io/cloud-builders/kubectl'
+            args '--entrypoint='
         }
     }
     environment {
