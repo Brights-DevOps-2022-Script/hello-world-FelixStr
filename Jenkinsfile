@@ -22,6 +22,7 @@ pipeline {
         }
          stage('Push to ACR') {
             steps {
+                sh 'whoami'
                 sh 'docker login devops2022.azurecr.io -u ${ACRCreds_USR} -p ${ACRCreds_PSW}'
                 sh 'npm install'
                 sh 'npm run build'
