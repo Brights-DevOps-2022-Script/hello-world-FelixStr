@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image alpine/k8s:1.23.16
+            image 'alpine/k8s:1.23.16'
             args '--entrypoint='
         }
     }
