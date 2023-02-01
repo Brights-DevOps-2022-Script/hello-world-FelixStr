@@ -22,7 +22,8 @@ pipeline {
         }
          stage('Push to ACR') {
             steps {
-                sh "docker login devops2022.azurecr.io -u <username> -p ${ACRCreds}" 
+                withCredentials([string(credentialsId: 'acr_creds', variable: 'ACR_PASSWORD')]) {
+                sh "docker login devops2022.azurecr.io -u <username> -p $ACR_PASSWORD"
                 sh 'npm install'
                 sh 'npm run build'
                 sh "docker tag felixstr4 devops2022.azurecr.io/devops2022.azurecr.io/nginx"
