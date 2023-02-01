@@ -22,7 +22,7 @@ pipeline {
         }
          stage('Push to ACR') {
             steps {
-                sh "docker login devops2022.azurecr.io -u afc373bb-3a48-411a-a448-2cd0314f6fc6 -p ${ACRCreds}"
+                sh "docker login devops2022.azurecr.io -u jester -p ${ACRCreds}"
                 sh 'npm install'
                 sh 'npm run build'
                 sh "docker tag felixstr4 devops2022.azurecr.io/devops2022.azurecr.io/nginx"
