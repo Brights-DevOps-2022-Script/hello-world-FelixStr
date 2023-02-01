@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'guitarrapc/docker-awscli-kubectl'
+            image 'devops2022.azurecr/alpine-simon'
             args '--entrypoint='
         }
     }
