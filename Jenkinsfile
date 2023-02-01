@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'devops2022.azurecr.io/alpine-simon'
-            args '--entrypoint='
+            args '--user root --privileged'
         }
     }
     environment {
@@ -25,7 +25,7 @@ pipeline {
             steps {
                 
                 sh 'docker login devops2022.azurecr.io -u ${ACRCreds_USR} -p ${ACRCreds_PSW}'
-                sh 'whoami'
+                
                 sh 'npm install'
                 sh 'npm run build'
                 sh "docker tag felixstr4 devops2022.azurecr.io/devops2022.azurecr.io/nginx"
