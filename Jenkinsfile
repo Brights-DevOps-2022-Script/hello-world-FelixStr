@@ -22,7 +22,6 @@ pipeline {
         }
          stage('Push to ACR') {
             steps {
-                withCredentials([string(credentialsId: 'acr_creds', variable: 'ACR_PASSWORD')]) {
                 sh "docker login devops2022.azurecr.io -u <username> -p $ACR_PASSWORD"
                 sh 'npm install'
                 sh 'npm run build'
@@ -31,5 +30,4 @@ pipeline {
             }
         }
     }
-}
 }
