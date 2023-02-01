@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: felixstr
+        image: devops2022.azurecr.io/nginx:felixstr2
         ports:
         - containerPort: 80
