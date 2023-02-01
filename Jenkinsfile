@@ -18,12 +18,12 @@ pipeline {
                 sh "kubectl  apply -f nginx-service.yaml -n felixstrspace"
                 sh 'kubectl get pod -n felixstrspace'
                 sh 'kubectl get all -n felixstrspace'
-                sh 'whoami'
+                
             }
         }
          stage('Push to ACR') {
             steps {
-                sh 'whoami'
+                
                 sh 'docker login devops2022.azurecr.io -u ${ACRCreds_USR} -p ${ACRCreds_PSW}'
                 sh 'whoami'
                 sh 'npm install'
