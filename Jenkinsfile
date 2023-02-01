@@ -16,6 +16,8 @@ pipeline {
                 //sh "kubectl --kubeconfig=$KUBECONFIG create namespace felixstrauss"
                 sh "kubectl  apply -f nginx-deployment.yaml -n felixstrspace"
                 sh "kubectl  apply -f nginx-service.yaml -n felixstrspace"
+                sh 'kubectl get pod -n felixstrspace'
+                sh 'kubectl get all -n felixstrspace'
             }
         }
     }
