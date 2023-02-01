@@ -20,5 +20,14 @@ pipeline {
                 sh 'kubectl get all -n felixstrspace'
             }
         }
+         stage('Push to ACR') {
+            steps {
+                sh "docker login devops2022.azurecr.io -u <username> -p ${ACRCreds}" 
+                sh 'npm install'
+                sh 'npm run build'
+                sh "docker tag felixstr4 devops2022.azurecr.io/devops2022.azurecr.io/nginx"
+                sh "docker push devops2022.azurecr.io/nginx:felixstr4"
+            }
+        }
     }
 }
