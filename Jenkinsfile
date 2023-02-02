@@ -1,5 +1,6 @@
 pipeline {
-    agent {
+    agent any
+    
        environment{
         ACR_CRED = credentials('acr_creds')
     }
@@ -10,13 +11,16 @@ pipeline {
                 sh "docker tag felixstr4 devops2022.azurecr.io/devops2022.azurecr.io/nginx"
                 sh "docker push devops2022.azurecr.io/nginx:felixstr4"
             }
+        }
          stage('deploy') {
             agent {
                 docker {
                     image 'alpine/k8s:1.23.16'
                 }
+            }
             environment{
                  KUB_CONF = credentials('k8s_config')
+            }
             steps {
                 sh 'id'
                  sh 'kubectl apply -f nginx-namespace.yaml'
@@ -31,5 +35,4 @@ pipeline {
         }
     }
 }
-        }
-    }}}
+        
