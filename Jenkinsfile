@@ -7,8 +7,9 @@ pipeline {
         stage('ACR Login') {
             steps{
                 sh 'docker login devops2022.azurecr.io -u $ACR_CRED_USR -p $ACR_CRED_PSW'
-               // sh "docker tag felixstr4 devops2022.azurecr.io/devops2022.azurecr.io/nginx"
-                //sh "docker push devops2022.azurecr.io/nginx:felixstr4"
+                sh 'docker build -t devops2022.azurecr.io/felixstrauss:$GIT_COMMIT .'
+                sh "docker push devops2022.azurecr.io/felixstrauss:$GIT_COMMIT"
+                sh 'docker rmi devops2022.azurecr.io/felixstrauss:$GIT_COMMIT'
             }
         }
          stage('deploy') {
