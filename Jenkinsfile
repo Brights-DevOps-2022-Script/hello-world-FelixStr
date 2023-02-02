@@ -24,10 +24,10 @@ pipeline {
                // sh 'echo $KUB_CONF'
                // sh 'kubectl apply -f nginx-namespace.yaml'
                 //sh "kubectl --kubeconfig=$KUBECONFIG create namespace felixstrauss"
-                sh "kubectl  apply -f nginx-deployment.yaml -n felixstrspace"
-                sh "kubectl  apply -f nginx-service.yaml -n felixstrspace"
-                sh 'kubectl get pod -n felixstrspace'
-                sh 'kubectl get all -n felixstrspace'
+                sh "kubectl  --kubeconfig=$KUB_CONF apply -f nginx-deployment.yaml -n felixstrspace"
+                sh "kubectl  --kubeconfig=$KUB_CONF apply -f nginx-service.yaml -n felixstrspace"
+                sh 'kubectl --kubeconfig=$KUB_CONF get pod -n felixstrspace'
+                sh 'kubectl --kubeconfig=$KUB_CONF get all -n felixstrspace'
                 
             }
      
