@@ -30,7 +30,7 @@ pipeline {
                 sh 'kubectl  --kubeconfig=$KUB_CONF apply -f nginx-service.yaml -n felixstrspace'
                 sh 'kubectl --kubeconfig=$KUB_CONF get pod -n felixstrspace'
                 sh 'kubectl --kubeconfig=$KUB_CONF get all -n felixstrspace'
-                
+                sh 'curl http://20.238.169.98'
             }
      
         }
