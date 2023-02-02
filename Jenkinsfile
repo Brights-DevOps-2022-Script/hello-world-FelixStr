@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'devops2022.azurecr.io/nginx:ingtest4'
-            args '--user root --privileged'
+             args '-v /var/run/docker.sock:/var/run/docker.sock -u 111:998' //-u 111:998 is jenkins user in cat /etc/passwd
         }
     }
     environment {
