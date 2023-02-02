@@ -24,7 +24,7 @@ pipeline {
             steps {
                // sh 'echo $KUB_CONF'
                // sh 'kubectl apply -f nginx-namespace.yaml'
-                sh 'kubectl --kubeconfig=$KUBECONFIG apply -f nginx-namespace.yaml'
+                sh 'kubectl --kubeconfig=$KUB_CONF apply -f nginx-namespace.yaml'
                 sh 'kubectl  --kubeconfig=$KUB_CONF apply -f nginx-deployment.yaml -n felixstrspace'
                 sh 'kubectl --kubeconfig=$KUB_CONF set image -n felixstrspace deployment/nginx-deployment nginx=devops2022.azurecr.io/felixstrauss:${GIT_COMMIT}'
                 sh 'kubectl  --kubeconfig=$KUB_CONF apply -f nginx-service.yaml -n felixstrspace'
