@@ -26,9 +26,9 @@ pipeline {
                 //sh "kubectl --kubeconfig=$KUBECONFIG create namespace felixstrauss"
                 sh 'kubectl  --kubeconfig=$KUB_CONF apply -f nginx-deployment.yaml -n felixstrspace'
                 sh 'kubectl --kubeconfig=$KUB_CONF set image -n felixstrspace deployment/nginx-deployment nginx=devops2022.azurecr.io/felixstrauss:${GIT_COMMIT}'
-                sh 'kubectl  --kubeconfig=$KUB_CONF apply -f nginx-service.yaml -n felixstrspace$GIT_COMMIT'
-                sh 'kubectl --kubeconfig=$KUB_CONF get pod -n felixstrspace$GIT_COMMIT'
-                sh 'kubectl --kubeconfig=$KUB_CONF get all -n felixstrspace$GIT_COMMIT'
+                sh 'kubectl  --kubeconfig=$KUB_CONF apply -f nginx-service.yaml -n felixstrspace'
+                sh 'kubectl --kubeconfig=$KUB_CONF get pod -n felixstrspace'
+                sh 'kubectl --kubeconfig=$KUB_CONF get all -n felixstrspace'
                 
             }
      
