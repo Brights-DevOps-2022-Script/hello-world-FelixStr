@@ -21,8 +21,8 @@ pipeline {
                  KUB_CONF = credentials('k8s_config')
             }
             steps {
-                sh 'echo $KUB_CONF'
-                 sh 'kubectl apply -f nginx-namespace.yaml'
+               // sh 'echo $KUB_CONF'
+               // sh 'kubectl apply -f nginx-namespace.yaml'
                 //sh "kubectl --kubeconfig=$KUBECONFIG create namespace felixstrauss"
                 sh "kubectl  apply -f nginx-deployment.yaml -n felixstrspace"
                 sh "kubectl  apply -f nginx-service.yaml -n felixstrspace"
