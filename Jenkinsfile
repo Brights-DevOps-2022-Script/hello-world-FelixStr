@@ -4,6 +4,13 @@ pipeline {
         ACR_CRED = credentials('acr_creds')
     }
     stages {
+          stage('check') {
+            steps {
+                script {
+                    if (sh(script: "git log -1 --pretty=%B | fgrep -ie '[skip ci]' -e '[ci skip]'", returnStatus: true) == 0) {
+                    currentBuild.result = 'ABORTED'
+                    error 'Aborting because commit message contains [skip ci]'
+                    }
         stage('ACR Login') {
             steps{
                 sh 'docker login devops2022.azurecr.io -u $ACR_CRED_USR -p $ACR_CRED_PSW'
