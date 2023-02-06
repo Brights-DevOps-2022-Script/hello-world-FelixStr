@@ -91,7 +91,7 @@ images:
           //  agent {
             //    docker {
               //      image 'alpine/k8s:1.23.16'
-                }
+}}
             }
            // environment{
               //   KUB_CONF = credentials('k8s_config')
