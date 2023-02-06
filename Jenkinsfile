@@ -1,9 +1,5 @@
 pipeline {
     agent any
-    environment{
-        ACR_CRED = credentials('acr_creds')
-         COMMIT_HASH = env.GIT_COMMIT // Git environment variable that holds the commit hash
-    }
     stages {
           stage('check') {
             steps {
