@@ -15,14 +15,14 @@ pipeline {
         stage('ACR Login') {
             steps{
                 sh 'docker login devops2022.azurecr.io -u $ACR_CRED_USR -p $ACR_CRED_PSW'
-<<<<<<< HEAD
+
                // sh "docker tag felixstr4 devops2022.azurecr.io/devops2022.azurecr.io/nginx:$COMMIT_HASH"
                 //sh "docker push devops2022.azurecr.io/nginx:$COMMIT_HASH"
-=======
+
                 sh 'docker build -t devops2022.azurecr.io/felixstrauss:$GIT_COMMIT .'
                 sh "docker push devops2022.azurecr.io/felixstrauss:$GIT_COMMIT"
                 sh 'docker rmi devops2022.azurecr.io/felixstrauss:$GIT_COMMIT'
->>>>>>> a9f6780f4d04dbba92756c4be486a8778f82eb23
+
             }
         }
         stage('TEST DOCKER IMAGE') {
@@ -105,14 +105,13 @@ images:
            // steps {
                // sh 'echo $KUB_CONF'
                // sh 'kubectl apply -f nginx-namespace.yaml'
-<<<<<<< HEAD
+
                 //sh "kubectl --kubeconfig=$KUBECONFIG create namespace felixstrauss"
                 sh 'kubectl  --kubeconfig=$KUB_CONF apply -f nginx-deployment.yaml -n felixstrspace deployment/nginx-deployment nginx=devops2022.azurecr.io/felixstrauss:${GIT_COMMIT}'
                 sh 'kubectl  --kubeconfig=$KUB_CONF apply -f nginx-service.yaml -n felixstrspace'
                 sh 'kubectl --kubeconfig=$KUB_CONF get pod -n felixstrspace'
                 sh 'kubectl --kubeconfig=$KUB_CONF get all -n felixstrspace'
-                
-=======
+
             //    sh 'kubectl --kubeconfig=$KUB_CONF apply -f nginx-namespace.yaml'
               //  sh 'kubectl  --kubeconfig=$KUB_CONF apply -f nginx-deployment.yaml -n felixstrspace'
                 //sh 'kubectl --kubeconfig=$KUB_CONF set image -n felixstrspace deployment/nginx-deployment nginx=devops2022.azurecr.io/felixstrauss:${GIT_COMMIT}'
@@ -120,7 +119,7 @@ images:
               //  sh 'kubectl --kubeconfig=$KUB_CONF get pod -n felixstrspace'
               //  sh 'kubectl --kubeconfig=$KUB_CONF get all -n felixstrspace'
             //    sh 'curl http://20.238.169.98'
->>>>>>> a9f6780f4d04dbba92756c4be486a8778f82eb23
+
             }
      
         }
