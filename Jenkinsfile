@@ -38,7 +38,8 @@ pipeline {
                       echo 'apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - nginx.yml
+  - deployment.yaml
+  - service.yaml
 images:
   - name: felixstrauss
     newName: devops2022.azurecr.io/felixstrauss:${GIT_COMMIT}' > team-3-argoTest/argocd/kustomization.yml
