@@ -11,7 +11,7 @@ pipeline {
         stage('ACR Login') {
             steps{
               withDockerRegistry(credentialsId: 'acr_creds', url: 'https://devops2022.azurecr.io/v2/') {
-                sh 'docker login devops2022.azurecr.io -u $ACR_CRED_USR -p $ACR_CRED_PSW'
+               // sh 'docker login devops2022.azurecr.io -u $ACR_CRED_USR -p $ACR_CRED_PSW'
                 sh 'docker build -t devops2022.azurecr.io/felixstrauss:$GIT_COMMIT .'
                 sh "docker push devops2022.azurecr.io/felixstrauss:$GIT_COMMIT"
                 sh 'docker rmi devops2022.azurecr.io/felixstrauss:$GIT_COMMIT'
