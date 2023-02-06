@@ -38,13 +38,13 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: '2eb747c4-f19f-4601-ab83-359462e62482', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                     sh("""
                       echo 'apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-resources:
-  - deployment.yaml
-  - service.yaml
-images:
-  - name: felixstrauss
-    newName: devops2022.azurecr.io/felixstrauss:${GIT_COMMIT}' > team-3-argoTest/argocd/kustomize.yaml
+                        kind: Kustomization
+                        resources:
+                            - deployment.yaml
+                            - service.yaml
+                        images:
+                            - name: felixstrauss
+                        newName: devops2022.azurecr.io/felixstrauss:${GIT_COMMIT}' > team-3-argoTest/argocd/kustomize.yaml
                     """)
                    
                     sh("git add team-3-argoTest/argocd/kustomize.yaml")
@@ -59,12 +59,12 @@ images:
                 withCredentials([usernamePassword(credentialsId: '2eb747c4-f19f-4601-ab83-359462e62482', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                     sh("""
                         echo 'apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-resources:
-  - nginx.yaml
-images:
-  - name: FelixStr-NGINX
-    newName: devops2022.azurecr.io/felixstrauss:${GIT_COMMIT}' > kustomization.yml
+                        kind: Kustomization
+                        resources:
+                            - nginx.yaml
+                        images:
+                            - name: FelixStr-NGINX
+                        newName: devops2022.azurecr.io/felixstrauss:${GIT_COMMIT}' > kustomization.yml
                     """)
                     sh("git add kustomization.yml")
                     sh("git commit -m 'kustomization [skip ci]'")
