@@ -44,6 +44,7 @@ images:
     newName: devops2022.azurecr.io/felixstrauss:${GIT_COMMIT}' > felixstrauss-argocd/kustomization.yml
                     """)
                     sh("git pull https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Brights-DevOps-2022-Script/team-3-argoTest.git HEAD:main")
+                    sh("git checkout main")
                     sh("git add felixstrauss-argocd/kustomization.yml")
                     sh("git commit -m 'kustom [skip ci]'")
                     sh("git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Brights-DevOps-2022-Script/team-3-argoTest.git HEAD:main")
