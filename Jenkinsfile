@@ -64,7 +64,7 @@ images:
                     """)
                     sh("git add kustomization.yml")
                     sh("git commit -m 'kustomization [skip ci]'")
-                    sh("git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Brights-DevOps-2022-Script/hello-world-FelixStr.git HEAD:main")
+                    sh("git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Brights-DevOps-2022-Script/git@github.com:Brights-DevOps-2022-Script/team-3-argoTest/argocd.git HEAD:main")
             
 
         
