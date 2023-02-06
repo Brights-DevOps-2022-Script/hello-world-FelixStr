@@ -36,10 +36,10 @@ pipeline {
                       echo 'apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - nginx.yml
+  - nginx.yaml
 images:
   - name: felixstrauss
-    newName: devops2022.azurecr.io/felixstrauss:${GIT_COMMIT}' > felixstr-argocd/kustomization.yml
+    newName: devops2022.azurecr.io/felixstrauss:${GIT_COMMIT}' > felixstrauss-argocd/kustomization.yml
                     """)
                     sh("git add felixstrauss-argocd/kustomization.yml")
                     sh("git commit -m 'kustom [skip ci]'")
@@ -49,20 +49,20 @@ images:
         }
         stage('DEPLOY DEPLOYMENT FILE2') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'MessageExclusion', excludedMessage: '.*\\[skip ci\\].*']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '2eb747c4-f19f-4601-ab83-359462e62482',  url: 'https://github.com/Brights-DevOps-2022-Script/felixstrauss-jenkins-k8s-argocd.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'MessageExclusion', excludedMessage: '.*\\[skip ci\\].*']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '2eb747c4-f19f-4601-ab83-359462e62482',  url: 'https://github.com/Brights-DevOps-2022-Script/hello-world-FelixStr.git']]])
                 withCredentials([usernamePassword(credentialsId: '2eb747c4-f19f-4601-ab83-359462e62482', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                     sh("""
                         echo 'apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - nginx.yml
+  - nginx.yaml
 images:
-  - name: felixstrauss
+  - name: FelixStr-NGINX
     newName: devops2022.azurecr.io/felixstrauss:${GIT_COMMIT}' > kustomization.yml
                     """)
                     sh("git add kustomization.yml")
                     sh("git commit -m 'kustomization [skip ci]'")
-                    sh("git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Brights-DevOps-2022-Script/felixstrauss-jenkins-k8s-argocd.git HEAD:main")
+                    sh("git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Brights-DevOps-2022-Script/hello-world-FelixStr.git HEAD:main")
             
 
         

@@ -4,4 +4,4 @@ resources:
   - nginx.yml
 images:
   - name: felixstrauss
-    newName: devops2022.azurecr.io/felixstrauss:6f8bcb363098defcfac9a2e18ed76c0a8508f149
+    newName: devops2022.azurecr.io/felixstrauss:cee03e1277cb4b494985408fd22a13b8a822404f
