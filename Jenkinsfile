@@ -46,7 +46,7 @@ pipeline {
                             - service.yaml
                         images:
                             - name: felixstrauss
-                        newName: devops2022.azurecr.io/felixstrauss:${GIT_COMMIT}' > team-3-argoTest/argocd/kustomize.yaml
+                        newName: devops2022.azurecr.io/felixstrauss:${GIT_COMMIT}' > argocd/kustomize.yaml
                     """)
                    
                     sh("git add team-3-argoTest/argocd/kustomize.yaml")
