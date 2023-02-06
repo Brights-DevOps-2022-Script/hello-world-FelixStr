@@ -19,6 +19,18 @@ pipeline {
                 sh 'docker rmi devops2022.azurecr.io/felixstrauss:$GIT_COMMIT'
             }
         }
+        stage('TEST DOCKER IMAGE') {
+            steps {
+                 script {
+                    def imageTag = "felixstrauss:$GIT_COMMIT"
+                    def acrLoginServer = "devops2022.azurecr.io"
+                    def imageExists = sh(script: "set +x curl -fL ${acrLoginServer}/v2/manifests/${imageTag}", returnStatus: true) == 0
+                    if (!imageExists) {
+                        error("The image ${imageTag} was not found in the registry ${acrLoginServer}")
+                    }
+                }
+            }
+        }
          stage('deploy') {
             agent {
                 docker {
