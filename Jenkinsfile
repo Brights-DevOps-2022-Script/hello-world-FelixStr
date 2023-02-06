@@ -86,7 +86,7 @@ images:
         
         
         
-      {{ {{{{{{ 
+      {{{{{{{{ 
         
         // stage('deploy') {
           //  agent {
