@@ -3,5 +3,5 @@ kind: Kustomization
 resources:
   - nginx.yml
 images:
-  - name: FelixStr-NGINX
-    newName: devops2022.azurecr.io/felixstrauss:efda4727a702861180c41825635c00c2fb2f5d41
+  - name: felixstrauss
+    newName: devops2022.azurecr.io/felixstrauss:6f8bcb363098defcfac9a2e18ed76c0a8508f149
