@@ -1,13 +1,16 @@
 pipeline {
     agent any
     stages {
-          stage('check') {
+        stage('check') {
             steps {
                 script {
                     if (sh(script: "git log -1 --pretty=%B | fgrep -ie '[skip ci]' -e '[ci skip]'", returnStatus: true) == 0) {
-                    currentBuild.result = 'ABORTED'
-                    error 'Aborting because commit message contains [skip ci]'
-                    }}}}
+                        currentBuild.result = 'ABORTED'
+                        error 'Aborting because commit message contains [skip ci]'
+                    }
+                }
+            }
+        }
         stage('ACR Login') {
             steps{
               withDockerRegistry(credentialsId: 'acr_creds', url: 'https://devops2022.azurecr.io/v2/') {
@@ -15,8 +18,8 @@ pipeline {
                 sh 'docker build -t devops2022.azurecr.io/felixstrauss:$GIT_COMMIT .'
                 sh "docker push devops2022.azurecr.io/felixstrauss:$GIT_COMMIT"
                 sh 'docker rmi devops2022.azurecr.io/felixstrauss:$GIT_COMMIT'
+               }
             }
-        }
         }
         stage('TEST DOCKER IMAGE') {
             steps {
@@ -30,7 +33,7 @@ pipeline {
                 }
             }
         }
-      stage('DEPLOY DEPLOYMENT FILE') {
+        stage('DEPLOY DEPLOYMENT FILE') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '2eb747c4-f19f-4601-ab83-359462e62482',  url: 'https://github.com/Brights-DevOps-2022-Script/team-3-argoTest.git']]])
                 sh("git pull https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Brights-DevOps-2022-Script/team-3-argoTest.git HEAD:main")
