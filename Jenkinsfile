@@ -49,7 +49,7 @@ pipeline {
                         newName: devops2022.azurecr.io/felixstrauss:${GIT_COMMIT}' > argocd/kustomize.yaml
                     """)
                    
-                    sh("git add team-3-argoTest/argocd/kustomize.yaml")
+                    sh("git add argocd/kustomize.yaml")
                     sh("git commit -m 'kustom [skip ci]'")
                     sh("git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Brights-DevOps-2022-Script/team-3-argoTest.git HEAD:main")
                 }
