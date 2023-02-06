@@ -67,11 +67,8 @@ images:
                     sh("git add kustomization.yml")
                     sh("git commit -m 'kustomization [skip ci]'")
                     sh("git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Brights-DevOps-2022-Script/felixstrauss-jenkins-k8s-argocd.git HEAD:main")
-                }
-            }
-        }
-    }
-}
+            
+
         
         
         
@@ -86,7 +83,7 @@ images:
         
         
         
-      {{{{{{{{ 
+     
         
         // stage('deploy') {
           //  agent {
@@ -109,7 +106,5 @@ images:
             //    sh 'curl http://20.238.169.98'
             }
      
-        }
-    }
-}
+    
         
