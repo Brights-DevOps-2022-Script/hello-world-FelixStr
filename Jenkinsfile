@@ -42,11 +42,11 @@ resources:
   - service.yaml
 images:
   - name: felixstrauss
-    newName: devops2022.azurecr.io/felixstrauss:${GIT_COMMIT}' > team-3-argoTest/argocd/kustomization.yml
+    newName: devops2022.azurecr.io/felixstrauss:${GIT_COMMIT}' > team-3-argoTest/argocd/kustomization.yaml
                     """)
                     sh("git pull https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Brights-DevOps-2022-Script/team-3-argoTest.git HEAD:main")
                     sh("git checkout main")
-                    sh("git add team-3-argoTest/argocd/kustomization.yml")
+                    sh("git add team-3-argoTest/argocd/kustomization.yaml")
                     sh("git commit -m 'kustom [skip ci]'")
                     sh("git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Brights-DevOps-2022-Script/team-3-argoTest.git HEAD:main")
                 }
