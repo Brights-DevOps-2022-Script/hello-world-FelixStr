@@ -1,0 +1,7 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - nginx.yaml
+images:
+  - name: FelixStr-NGINX
+    newName: devops2022.azurecr.io/felixstrauss:c55a1a5a11e0f9e12e4078a716f251ff2ea91135
