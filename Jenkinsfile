@@ -1,16 +1,6 @@
 pipeline {
     agent any
     stages {
-        stage('check') {
-            steps {
-                script {
-                    if (sh(script: "git log -1 --pretty=%B | fgrep -ie '[skip ci]' -e '[ci skip]'", returnStatus: true) == 0) {
-                        currentBuild.result = 'ABORTED'
-                        error 'Aborting because commit message contains [skip ci]'
-                    }
-                }
-            }
-        }
         stage('ACR Login') {
             steps{
               withDockerRegistry(credentialsId: 'acr_creds', url: 'https://devops2022.azurecr.io/v2/') {
